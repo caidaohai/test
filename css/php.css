@@ -1,3 +1,21 @@
+.dark body,.dark div,.dark span,.dark object,.dark h1,.dark h2,.dark h3,.dark h4,.dark h5,.dark h6,.dark p,.dark em,.dark font,.dark img,.dark strong,.dark b,.dark u,.dark i,.dark center,.dark dl,.dark dt,.dark dd,.dark ol,.dark ul,.dark li,.dark fieldset,.dark form,.dark table,.dark caption,.dark tbody,.dark tfoot,.dark thead,.dark th,.dark td{
+		background:#333333 !important;
+		color:#A0A0A0 !important;
+		border-color:#A0A0A0 !important;
+}
+.dark input,.dark button,.dark textarea{
+		background-color:#444444 !important;
+		color:#CCCCCC !important;
+		border-color:#A0A0A0 !important;
+}
+.dark a,.dark a *{
+	color:#93BCEC !important;
+	background-color:#333333 !important;
+}
+.dark a:active,.dark a:hover,.dark a:active *,.dark a:hover *{
+	color:#1F72D0 !important;
+	background-color:#C0C0C0 !important;
+}
 .main-title{
 	padding-top:10%;
 }
@@ -9,4 +27,39 @@
 }
 .main-toggle-style{
 	padding-top:10%;
+}
+.content-list > div {
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 180%;
+}
+.top_listb h2{
+	font-size:26px;
+}
+.top_list_button,.top_content_button{
+	padding:20px 0 10px 0;
+}
+.sub-sub-content-list{
+	font-size: 14px;
+    line-height: 150%;
+}
+.c-title{
+	display:none;
+}
+.top_content h2{
+	font-size:26px;
+	text-align:center;
+}
+.sub-sub-content h4{
+	font-size:16px;
+	margin-top:20px;
+}
+.sub-sub-content p{
+	font-size:14px;
+	margin:0;
+	text-indent:15px;
+	line-height:180%
+}
+.content-main h4{
+	
 }
