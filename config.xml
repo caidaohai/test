@@ -16,5 +16,5 @@
   <author href="https://build.phonegap.com" email="support@phonegap.com">
       caidh
   </author>
-
+<icon src="icon.png" />
 </widget>
