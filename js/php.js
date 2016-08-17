@@ -46,6 +46,30 @@ $(function(){
 	//结束
 	
 	//读取xml 内容
-	var main_toggle_style = $('.chose-color').find('.main-toggle-style');
+	var content_list = $('.chose-color').find('.content-list');
+	if(content_list.length > 0 ){
+		$.ajax({  
+			url: 'data.xml',  
+			type: 'GET',  
+			dataType: 'xml',  
+			timeout: 1000,  //设定超时  
+			cache: false,   //禁用缓存  
+			error: function(xml) {  
+				alert("加载XML文档出错!");  
+			},  
+			success: function(data) {
+				var chapter_title = $(data).find('chapter>title');
+				var title_count = chapter_title.length;
+				var html = '';
+				if(title_count > 0){
+					for(var i =0 ;i < title_count;i++){
+						html += '<div class="col-sm-12 col-xs-12">'+chapter_title.eq(i).text()+'</div>';
+					}
+				}
+				content_list.append(html);
+			}
+		}); 
+	}
+	
 	
 })
