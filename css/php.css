@@ -17,20 +17,20 @@
 	background-color:#C0C0C0 !important;
 }
 .main-title{
-	padding-top:10%;
+	padding-top:20%;
 }
 .main-author{
 	padding-top:2%;
 }
 .main-button{
-	padding-top:10%;
+	padding-top:20%;
 }
 .main-toggle-style{
 	padding-top:10%;
 }
 .content-list > div {
     cursor: pointer;
-    font-size: 16px;
+    font-size: 18px;
     line-height: 180%;
 }
 .top_listb h2{
@@ -40,8 +40,13 @@
 	padding:20px 0 10px 0;
 }
 .sub-sub-content-list{
-	font-size: 14px;
+	font-size: 16px;
     line-height: 150%;
+	padding:10px 0 10px 15px;
+}
+.sub-content-list .title{
+	font-size:20px;
+	padding:20px 0;
 }
 .c-title{
 	display:none;
@@ -51,11 +56,11 @@
 	text-align:center;
 }
 .sub-sub-content h4{
-	font-size:16px;
+	font-size:20px;
 	margin-top:20px;
 }
 .sub-sub-content p{
-	font-size:14px;
+	font-size:16px;
 	margin:0;
 	text-indent:15px;
 	line-height:180%
