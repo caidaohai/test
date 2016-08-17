@@ -47,6 +47,7 @@ $(function(){
 	
 	//读取xml 内容
 	var content_list = $('.chose-color').find('.content-list');
+	alert(222);
 	if(content_list.length > 0 ){
 		$.ajax({  
 			url: 'data.xml',  
