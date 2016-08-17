@@ -44,7 +44,7 @@
 			 <data>
 			        <h4>2.删除元素的例子，猴子选大王</h4>
 			        <p xml:space="preserve">
-						function chosedw($num,$n){&lt;br /&lt;    $arr=array();    for($i=1;$i&lt;=num;$i++){        $arr[$i]=$i;}    $j=1;    while(count($arr) &gt; 1){        if($j%$n == 0){            unset($arr[$i]);}else{            $arr[]=$arr[$j];            unset($arr[$j]);}        $j++}     return $arr;}
+						function chosedw($num,$n){&lt;br /&gt;    $arr=array();&lt;br /&gt;    for($i=1;$i&lt;=num;$i++){&lt;br /&gt;        $arr[$i]=$i;}&lt;br /&gt;    $j=1;&lt;br /&gt;    while(count($arr) &gt; 1){&lt;br /&gt;        if($j%$n == 0){&lt;br /&gt;            unset($arr[$i]);}else{&lt;br /&gt;            $arr[]=$arr[$j];&lt;br /&gt;            unset($arr[$j]);}&lt;br /&gt;        $j++}&lt;br /&gt;     return $arr;&lt;br /&gt;}
 					</p>
 			 </data>
 		</subchapter>
