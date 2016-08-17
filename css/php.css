@@ -47,6 +47,7 @@
 .sub-content-list .title{
 	font-size:20px;
 	padding:20px 0;
+	display:block;
 }
 .c-title{
 	display:none;
