@@ -1,6 +1,15 @@
 $(function(){
 	//初始化
 	$('.chose-color').height($(window).height());
+	sub_chapter_title =  localStorage.getItem("sub_chapter_title");
+	if(sub_chapter_title == null){
+		get_sub_chapter_title();
+	}
+	chapter_title =  localStorage.getItem("chapter_title");
+	if(chapter_title == null){
+		get_chapter_title();
+	}	
+	get_chapter_title();
 	//结束
 	
 	//解析并设置白天还是黑夜
