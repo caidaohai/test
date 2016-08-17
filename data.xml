@@ -1,0 +1,52 @@
+<?xml version=1.0 encoding="utf-8" ?>
+<root>
+	<version>1.0</version>
+	<author>蔡道海</author>
+	<title>PHP总结</title>
+	<chapter>
+		<title>数组</title>
+		<subchapter>
+			<title>数组的概述</title>
+			 <data>数组:把若干个变量组合在一起的一个集合</data>
+		</subchapter>
+		<subchapter>
+			<title>数组的定义</title>
+			 <data>1.使用array定义数组;$ = array('a','b','c','d');</data>
+			 <data>
+			        <dt>2.直接赋值声明</dt>
+			        <br>$a[0] = 1;</br>
+					<br>$a[1]='a';</br>
+					<br>$a['t'] = 5;</br>
+			 </data>
+			 <data>
+			     <dt>3.数组的自动增长下标，默认是从0开始的，自动增长都是出现过的最大值加1，关联数组的字符串下标，不会影响索引下标的排列规则</dt>
+			     <br>$a[] = 1;//下标为0</br>
+				 <br>$a[] = 3;//下标为1</br>
+				 <br>$a[7] = 'yy';//下标为7</br>
+				 <br>$a[] = 8;//下标为8</br>
+				 <br>$a[3] = 2;//下标为3</br>
+				 <br>$a[] = 3;//下标为9,<strong>出现的最大的下标加1</strong></br>
+				 <br>$a['one'] = 3;</br>
+				 <br>$a[] = 'haha'//下标为10,<strong>关联数组字符串下标不影响索引的自增</strong></br>
+			 </data>
+			 <data>
+				<dt>4.在5.4版本以后支持如下赋值</dt>
+				<br>$arr = [1,2,'aa','bb']</br>
+			 </data>
+		</subchapter>
+		<subchapter>
+			<title>删除数组中的元素</title>
+			 <data>
+					<dt>1.使用unset删除数组中的元素</dt>
+					<br>unset[2]</br>
+					<br>删除之后索引乱掉了，可以使用array_values($arr)恢复索引</br>
+			</data>
+			 <data>
+			        <dt>2.删除元素的例子，猴子选大王</dt>
+			        <br>
+						function chosedw($num,$n){&nbsp;&nbsp;&nbsp;&nbsp;$arr=array();&nbsp;&nbsp;&nbsp;&nbsp;for($i=1;$i&lt;=num;$i++){&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$arr[$i]=$i;}&nbsp;&nbsp;&nbsp;&nbsp;$j=1;&nbsp;&nbsp;&nbsp;&nbsp;while(count($arr) &gt; 1){&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if($j%$n == 0){&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;unset($arr[$i]);}else{&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$arr[]=$arr[$j];&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;unset($arr[$j]);}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$j++}&nbsp;&nbsp;&nbsp;&nbsp; return $arr;}
+					</br>
+			 </data>
+		</subchapter>
+	</chapter>
+</root>
