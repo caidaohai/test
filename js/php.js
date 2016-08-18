@@ -167,6 +167,7 @@ function get_sub_chapter_title(){
 						subchapter_title_count = subchapter_title_obj.length;
 						for(var j =0 ;j < subchapter_title_count;j++){
 							subchapter_title_save[i][j] =  subchapter_title_obj.eq(j).text();
+							subchapter_title_save[i][j] = subchapter_title_save[i][j].replace('\\t','&nbsp;&nbsp;&nbsp;&nbsp;');
 						}
 					}
 					 localStorage.setItem("sub_chapter_title",JSON.stringify(subchapter_title_save));
@@ -193,6 +194,7 @@ function get_chapter_title(){
 				if(title_count > 0){
 					for(var i =0 ;i < title_count;i++){
 						chapter_title_save[i] = chapter_title_obj.eq(i).text();
+						chapter_title_save[i] = chapter_title_save[i].replace('\\t','&nbsp;&nbsp;&nbsp;&nbsp;');
 					}
 					 localStorage.setItem("chapter_title",JSON.stringify(chapter_title_save));
 				}
@@ -218,7 +220,9 @@ function get_chapter_content(chapter_num,sub_chapter_num){
 				if(content_obj_count > 0){
 					for(var i =0 ;i < content_obj_count;i++){
 						chapter_content_save[i] = content_obj.eq(i).html();
+						chapter_content_save[i] = chapter_content_save[i].replace(/\\t/g,'&nbsp;&nbsp;&nbsp;&nbsp;');
 					}
+					
 					 localStorage.setItem("sub_chapter_content_"+chapter_num+"_"+"_"+sub_chapter_num,JSON.stringify(chapter_content_save));
 				}
 			}
