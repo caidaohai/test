@@ -11,7 +11,7 @@
 		</subchapter>
 		<subchapter>
 			<title>数组的定义</title>
-			 <data><h4>1.使用array定义数组;$ = array('a','b','c','d');</h4></data>
+			 <data><h4>1.使用array定义数组;$a = array('a','b','c','d');</h4></data>
 			 <data>
 			        <h4>2.直接赋值声明</h4>
 			        <p>$a[0] = 1;</p>
@@ -38,15 +38,261 @@
 			<title>删除数组中的元素</title>
 			 <data>
 					<h4>1.使用unset删除数组中的元素</h4>
-					<p>unset[2]</p>
+					<p>unset($a[2])</p>
 					<p>删除之后索引乱掉了，可以使用array_values($arr)恢复索引</p>
 			</data>
 			 <data>
 			        <h4>2.删除元素的例子，猴子选大王</h4>
 			        <p xml:space="preserve">
-						<p>function chosedw($num,$n){</p><p>    $arr=array();</p><p>    for($i=1;$i&lt;=num;$i++){</p><p>        $arr[$i]=$i;}</p><p>    $j=1;</p><p>    while(count($arr) &gt; 1){</p><p>        if($j%$n == 0){</p><p>            unset($arr[$i]);}else{</p><p>            $arr[]=$arr[$j];</p><p>            unset($arr[$j]);}</p><p>        $j++}</p><p>     return $arr;</p><p>}</p>
+						<p>function chosedw($num,$n){</p><p>\t$arr=array();</p><p>\tfor($i=1;$i&lt;=num;$i++){</p><p>\t$arr[$i]=$i;}</p><p>\t$j=1;</p><p>\twhile(count($arr) &gt; 1){</p><p>\t\tif($j%$n == 0){</p><p>\t\t\tunset($arr[$i]);</p><p>\t\t}else{</p><p>\t\t\t$arr[]=$arr[$j];</p><p>\t\t\tunset($arr[$j]);</p><p>\t\t}</p><p>\t\t$j++</p><p>\t}</p><p>\treturn $arr;</p><p>}</p>
 					</p>
 			 </data>
+		</subchapter>
+		<subchapter>
+			<title>超全局数组（预定义变量）</title>
+			<data>
+				<h4>1.系统提供的超全局变量数组共有9个</h4>
+				<p>$_SERVER,$_ENV,$_GET,$_POST,$_REQUEST,$_FILES,$_COOKIE,$_SESSION,$GLOBALS;每个预定义数组都有自己独特的功能</p> 
+			</data>
+			<data>
+				<h4>2.常见的$_SERVER变量</h4>
+				<p>$_SERVER['DOCUMENT_ROOT']:当前脚本所在的文档根目录（服务器端的目录）</p>
+				<p>$_SERVER['HTTP_REFERER']:连接到当前页面的前一个页面的url地址</p>
+				<p>$_SERVER['HTTP_USER_AGENT']:用户浏览器信息</p>
+				<p>$_SERVER['REMOTE_ADDR']:客户端IP</p>
+				<p>$_SERVER['SERVER_ADDR']:服务器IP</p>
+				<p>$_SERVER['SERVER_PORT']:服务器所使用的端口</p>
+				<p>$_SERVER['SERVER_FILENAME']:从php服务器端获取当前执行的文件的内容</p>
+				<p>以网址"http://www.baidu.com/index.php/a/b/c?s=a&amp;m=b"来说明下面几个值</p>
+				<p>\t$_SERVER['SCRIPT_NAME']:当前执行脚本的名字，除去域名一直取到第一个.php,为/index.php</p>
+				<p>\t$_SERVER['PHP_SELF']:除域名外一直取到第一个?号，为/index.php/a/b/c</p>
+				<p>\t$_SERVER['PATH_INFO']:从.php开始取类似/xx/xx/xx直到遇到?，为/a/b/c</p>
+				<p>\t$_SERVER['REQUEST_URI']:除域名之外的所有，/index.php/a/b/c?s=a&amp;m=b</p>
+				<p>\t$_SERVER['QUERY_STRING']:url中的查询字符串，s=a&amp;m=b</p>
+			</data>
+			<data>
+				<h4>3.获取客户端IP</h4>
+				<p>function getIp()</p>
+				<p>\tif(!empty($_SERVER['HTTP_CLIENT_IP'])){</p>
+				<p>\t\treturn $_SERVER['HTTP_CLIENT_IP'];</p>
+				<p>}\t}else if(!empty($_SERVER['HTTP_X_FORWARDED_FOR'])){</p>
+				<p>\t\treturn $_SERVER['HTTP_X_FORWARDED_FOR'];</p>
+				<p>\t}else if(!empty($_SERVER['REMOTE_ADDR'])){</p>
+				<p>\t\treturn $_SERVER['REMOTE_ADDR'];</p>
+				<p>}else{</p>
+				<p>return '位置IP';</p>
+				<p>}</p>
+			</data>
+			<data>
+				<h4>4.register_globals配置</h4>
+				<p>php.ini中的此配置，影响$_GET和$_POST,如果此参数开启，则类似$_POST['name'] = 'caidh',则可以使用$name直接获取值，建议关闭，因为会带来重复和安全问题</p>
+			</data>
+		</subchapter> 
+		<subchapter>
+			<title>使用list,each,和while循环遍历数组</title>
+			 <data>
+					<h4>1.list函数的用法</h4>
+					<p>1.等号左边使用list函数，等号右边只能是一个数组</p>
+					<p>2.数组中有几个元素，list函数就有几个参数，并且参数必须是变量，不能是值</p>
+					<p>3.只能将索引数组且下标是连续的数组转成变量，是按下标0开始找的</p>
+					<p>4.可以在list参数中通过空项，选择性接受参数</p>
+					<p>\tlist($name,$age,$height) = array('caidh',28,1.65)</p>
+					<p>\t\t$name = 'caidh';</p>
+					<p>\t\t$age = 28</p>
+					<p>\t\t$height = 1.65</p>
+					<p>\t切割字符串</p>
+					<p>\t\t$str = "aa_bb";</p>
+					<p>\t\tlist($a,$b) = explode('_',$str)</p>
+					<p>\t\t$a = 'aa';$b = 'bb';</p>
+			</data>
+			<data>
+				<h4>2.each函数：一个数组作为参数，返回的值也是一个数组</h4>
+				<p>a.返回的值是一个数组，数组固定有4个元素，下标也是固定的值分别为1（值），value(值)，0(键),key（键）</p>
+				<p>b.each只处理当前元素，处理完后指针向下移动</p>
+				<p>c.如何指针已经在结束位置了，再使用each函数获取元素，返回false</p>
+			</data>
+			<data>
+				<h4>3.list,each,while结合使用遍历数组</h4>
+				<p>$a = array('caidh',35,1.65);</p>
+				<p>while(list($key,$value) = each($a)){</p>
+				<p>\teach "{$key}=&gt;{$value}";</p>
+				<p>}</p>
+			</data>
+		</subchapter>
+		<subchapter>
+			<title>数组的指针控制函数</title>
+			<data>
+				<h4>1.mixed next(array $arr)</h4>
+				<p>将指针向下移动，并返回此单元的值，若没有值，返回false</p>
+			</data>
+			<data>
+				<h4>2.mixed end(array $arr)</h4>
+				<p>将指针移动到最后，并返回其值</p>
+			</data>
+			<data>
+				<h4>3.mixed prev(array $arr)</h4>
+				<p>将指针向前移动，并返回其值，若没有值，返回false</p>
+			</data>
+			<data>
+				<h4>4.mixed reset(array $arr)</h4>
+				<p>将指针移动到开头处，并返回其值</p>
+			</data>
+			<data>
+				<h4>5.mixed key(array $arr)</h4>
+				<p>获取当前位置的下标</p>
+			</data>
+			<data>
+				<h4>6.mixed current(array $arr)</h4>
+				<p>获取当前位置的值</p>
+			</data>
+			<data>
+				<h4>7.array each(array $arr)</h4>
+				<p>返回数组指针当前的键值对并将指针向下移动一位</p>
+			</data>
+		</subchapter>
+		
+		<subchapter>
+			<title>数组的键值操作函数</title>
+			<data>
+				<h4>1.array array_values(array $arr)</h4>
+				<p>返回数组中的所有的值</p>
+			</data>
+			<data>
+				<h4>2.array array_keys(array $arr[,mixed $search_values [,bool $strict]])</h4>
+				<p>返回数组中的所有的键值</p>
+				<p>如果指明了search_value，则只返回此值的键名</p>
+				<p>$strict参数如果为true，则结合第二个参数进行全等查找</p>
+			</data>
+			<data>
+				<h4>3.bool in_array(mixed $needle,array $haystack[,bool $strick])</h4>
+				<p>查看$needle，是否存在于$haystack中，如果存在，返回true,不存在，返回false</p>
+				<p>$strick如果为true，则会进行严格查询值和类型</p>
+			</data>
+			<data>
+				<h4>4.mixed array_search(mixed $needle,array $haystack[,bool $strick])</h4>
+				<p>查看$needle是否存在于数组$haystack,如果存在，返回其键值，不存在，返回false;</p>
+			</data>
+			<data>
+				<h4>5.bool array_key_exists(mixed $needle,array $haystack)</h4>
+				<p>查看$needle是否是数组$haystack的一个键，如果是，返回true,否则返回false</p>
+			</data>
+			<data>
+				<h4>6.array array_flip(array $strans)</h4>
+				<p>交换数组中的键值对，如果值有重复的，则后面的键值会覆盖前面的键值，如果值是非字符串和整数，则报错</p>
+			</data>
+			<data>
+				<h4>7.array array_reverse(array $arr[,bool $preserve_keys])</h4>
+				<p>将一个数组前后颠倒，如果preserve_keys为true,则索引数组的键名保留，为false，则索引数组键名不保留，默认为false；此参数对关联数组无影响</p>
+			</data>
+		</subchapter>
+		<subchapter>
+			<title>统计数组元素的个数与唯一性</title>
+			<data>
+				<h4>1.int count(mixed $var[, int $mode])</h4>
+				<p>计算数组中的单元数目或对象中的属性个数，如果$mode = 1,则对数组进行递归统计，多维数组也会被统计</p>
+			</data>
+			<data>
+				<h4>2.array array_count_values(array $arr)</h4>
+				<p>统计数组中所有值出现的次数</p>
+			</data>
+			<data>
+				<h4>3.array array_unique(array $arr)</h4>
+				<p>删除数组中重复出现的值，只保留第一次出现的值</p>
+			</data>
+		</subchapter>
+		<subchapter>
+			<title>使用回调函数处理数组</title>
+			<data>
+				<h4>1.array array_filter(array $arr[,callback $callbak])</h4>
+				<p>使用回调函数callback过滤数组$arr</p>
+				<p>如果不使用callback,则默认过滤掉假值(false,0,null,'0',0.0,'')</p>
+				<p>function myFun($value){</p>
+				<p>\tif($value &gt; 0)</p>
+				<p>\t\treturn true;</p>
+				<p>\telse</p>
+				<p>\t\treturn false;</p>
+				<p>}</p>
+				<p>array_filter($arr,"myFun");$arr会将依次传递给myFun函数，返回true的保留，返回false的删除</p>
+			</data>
+			<data>
+				<h4>2.bool array_walk(array &amp;$arr,callback $callback[,mixed $userdata])</h4>
+				<p>对数组$arr中的每个成员使用回调函数$callback</p>
+				<p>array_walk($arr,function($v,$k,$str){</p>
+				<p>\techo "{$v} {$str} {$k}";</p>
+				<p>},"##");</p>
+			</data>
+			<data>
+				<h4>3.array array_map(callback $callback,array $arr1[,array $arr2 [...]])</h4>
+				<p>将回调函数作用在给定的数组中</p>
+				<p>$arr = array_map("myFun",$arr1,$arr2,$arr3);</p>
+				<p>function myFun($v1,$v2,$v3){</p>
+				<p>\treturn $v1+$v2+$v3;</p>
+				<p>}</p>
+				<p>如果回调函数为null，则默认是聚合两个数组</p>
+				<p>$arr1 = array(1,2,3,4);</p>
+				<p>$arr2 = array('one','two','three')</p>
+				<p>$a = array_map(null,$arr1,$arr2);</p>
+				<p>结果$a: array(</p>
+				<p>\t0=>array(1,'one'),</p>
+				<p>\t1=>array(2,'two'),</p>
+				<p>\t2=>array(3,'three'),</p>
+				<p>\t3=>array(4,null))</p>
+			</data>
+		</subchapter>
+		<subchapter>
+		<title>使用php实现算法</title>
+		<data>
+			<h4>1.冒泡</h4>
+			<p>function msort($arr){</p>
+			<p>\tif(!is_array($arr) || empty($arr)){</p>
+			<p>\t\treturn array();</p>
+			<p>\t}</p>
+			<p>\tfor($i = 0;$i &lt; count($arr);$i++){</p>
+			<p>\t\tfor($j = 0;$j &lt; count($arr)-$i-1;$j++){</p>
+			<p>\t\t\tif($arr[$j] &gt; $arr[$j+1]){</p>
+			<p>\t\t\t\t$tmp = $arr[$j];</p>
+			<p>\t\t\t\t$arr[$j] = $arr[$j+1];</p>
+			<p>\t\t\t\t$arr[$j+1] = $tmp;</p>
+			<p>\t\t\t}</p>
+			<p>\t\t}</p>
+			<p>\t}</p>
+			<p>return $arr;</p>
+			<p>}</p>
+		</data>
+		<data>
+			<h4>2.排序</h4>
+			<p>function ksort($arr){</p>
+			<p>\tif(!is_array($arr) || empty($arr))</p>
+			<p>\t\treturn array();</p>
+			<p>\t$len = count($arr);</p>
+			<p>\tif($len &lt;= 1)</p>
+			<p>\t\treturn $arr;</p>
+			<p>\t$key[0] = $arr[0];</p>
+			<p>\t$left = array();</p>
+			<p>\t$right = array();</p>
+			<p>\tfor($i = 1;$i&lt;$len;$i++){</p>
+			<p>\t\tif($arr[$i] &lt;= $key[0]){</p>
+			<p>\t\t\t$left[] = $arr[$i];</p>
+			<p>\t\t}else{</p>
+			<p>\t\t\t$right[] = $arr[$i];</p>
+			<p>\t\t}</p>
+			<p>\t}</p>
+			<p>\t$left=qsort($left);</p>
+			<p>\t$right=qsort($right);</p>
+			<p>return array_merge($left,$key,$right);</p>
+			<p>}</p>
+		</data>
+		</subchapter>
+		<subchapter>
+			<title>排序函数</title>
+			<data>
+				<h4>1.bool sort(array &amp;$array[,bool $sort_flag])</h4>
+				<p>对数组进行升序排序</p>
+			</data>
+			<data>
+				<h4>2.bool sort(array &amp;$array[,bool $sort_flag])</h4>
+				<p>对数组进行降序排序</p>
+			</data>
 		</subchapter>
 	</chapter>
 	<chapter>
